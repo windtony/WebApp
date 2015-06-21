@@ -13,5 +13,5 @@ H5+App一些常用的插件总结和页面布局.
 ###马上预览安装:
 安卓:<br />
 ![image](https://github.com/windtony/WebApp/blob/master/img/android.png)<br />
-IOS的一般要越狱:<br />
+IOS的要越狱才能下载:<br />
 ![image](https://github.com/windtony/WebApp/blob/master/img/apple.png)
