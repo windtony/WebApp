@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>select下拉框插件</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Cache-Control" name="no-store" />
+		<meta http-equiv="window-target" content="_top" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="renderer" content="webkit">
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/template.css" />
+		<style>
+		select{width:100%;height:50px;font-size:18px;-webkit-appearance:none;-moz-appearance:none;appearance:none;display:block;-webkit-box-sizing:border-box;box-sizing:border-box;color:#333;border-radius:0;border:0;-webkit-border-radius:0;background:url(img/drop.png) right center no-repeat;background-size:contain}
+		.selectContent{margin-top:20px;height:52px;border:1px;background:#777777;}
+		.search{font-size:1.6rem;background:#dd524d;color:#F0F0F0;border:0;padding:12px 0}
+		
+		/*清晰明了的模块写法:美化下拉框*/
+		.beautify a{color:#555}
+		.beautify a:hover{color:red}
+		.beautify input{font-size:14px;font-family:"微软雅黑","Microsoft Yahei"}
+		.beautify .nice-select{width:100%;padding-right:10px;height:40px;border:1px solid #999;position:relative;box-shadow:0 0 5px #999;background:url(img/drop.png) right center no-repeat;background-size:contain}
+		.beautify .nice-select input{display:block;width:99.25%;height:38px;line-height:38px \9;border:0;outline:0;background:#f60;-webkit-border-radius:0;border-radius:0;}
+		.beautify .nice-select ul{width:100%;display:none;position:absolute;left:-1px;top:38px;overflow:hidden;background-color:#00cc66;max-height:150px;overflow-y:auto;border:1px solid #999;border-top:0;box-shadow:0 3px 5px #999;z-index:9999}
+		.beautify .nice-select ul li{height:30px;line-height:30px;overflow:hidden;padding:0 10px;cursor:pointer}
+		.beautify .nice-select ul li.on{background-color:blanchedalmond}
+		.mt20{margin-top:20px;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">select下拉框插件</h1>
+		</header>
+		<section class="mui-content">
+			<article>
+				<p>对于下拉框,一般细分有3种情况:</p>
+				<p>1,改变右边的下拉图标,但列表使用系统自带的</p>
+				<p>2,下拉图标和下拉列表美化效果</p>
+				<p>请在手机看效果吧,所看到的效果会不一样！</p>
+			</article>
+			<!--1,改变右边的下拉图标,但列表使用系统自带的-->
+		<div class="box selectContent">
+			<select>
+				<option value="选择1">1,下拉列表使用系统自带的</option>
+				<option value="选择2">选择2</option>
+				<option value="选择3">选择3</option>
+				<option value="选择4">选择4</option>
+			</select>
+		</div>
+		<!--1,改变右边的下拉图标,但列表使用系统自带的-->
+		
+		<!--2,下拉图标和下拉列表美化效果-->
+		<div class="beautify wrap mt20">
+			<!--这个插件兼容IE可以用到PC或移动端上.(使用JQ)-->
+			<div class="nice-select" name="nice-select">
+				<input type="text" value="2,下拉图标和下拉列表美化效果" readonly>
+				<ul>
+					<li data-value="1">相关链接1</li>
+					<li data-value="2">相关链接2</li>
+					<li data-value="3">相关链接3</li>
+					<li data-value="4">相关链接4</li>
+				</ul>
+			</div>
+		</div>
+		<!--2,下拉图标和下拉列表美化效果-->
+	</section>
+	<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init();
+	</script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script>
+	//2,下拉图标和下拉列表美化效果
+		$('[name="nice-select"]').click(function(e){
+		    $('[name="nice-select"]').find('ul').hide();
+		    $(this).find('ul').show();
+			e.stopPropagation();
+		});
+		$('[name="nice-select"] li').hover(function(e){
+			$(this).toggleClass('on');
+			e.stopPropagation();
+		});
+		$('[name="nice-select"] li').click(function(e){
+			var val = $(this).text();
+			$(this).parents('[name="nice-select"]').find('input').val(val);
+			$('[name="nice-select"] ul').hide();
+			e.stopPropagation();
+		});
+		$(document).click(function(){
+			$('[name="nice-select"] ul').hide();
+		});
+		//2,下拉图标和下拉列表美化效果
+	</script>
+	</body>
+
+</html>

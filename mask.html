@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>弹出框</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Cache-Control" name="no-store" />
+		<meta http-equiv="window-target" content="_top" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="renderer" content="webkit">
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/template.css" />
+		<style>
+	.gray{background:#404347;opacity:0.7;height:100%;}
+	.content{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);z-index:11}
+	.gray{position:absolute;top:0;left:0;right:0;z-index:11;}
+	.content{height:100px;background:#00CC66;width:45%;text-align:center;}
+	.outL{white-space:normal;word-break:break-all;width:100%;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">弹出框</h1>
+		</header>
+	<section class="mui-content">
+		<article>
+			<p>弹出框有2种:</p>
+			<p>1,调用系统原生的,这里就不说了,可以参考H5+的原生UI.</p>
+			<p>2,自己写出来(在这里的点击事件中,我使用了函数封装的方法,大家可以参考下)</p>
+			<p>各位注意了:在这里要注意一个我们常用而有时候会出现纠结的问题--水平和垂直同时居中</p>
+			<p class="outL">我在这里使用的方法是:position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);</p>
+		</article>
+	</section>
+	<div class="wrap grid">
+			<input type="button" name="mask" id="mask" value="遮罩层" />
+		</div>
+		<div class="wrap grid hide" id="show" >
+			<div class="gray" id="gray"></div>
+			<div class="content">
+				<p>Hello</p>
+				<input type="button" name="back" id="back" value="返回" />
+			</div>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init();
+	</script>
+	<script type="text/javascript">
+	window.onload=function(){
+		//这个是最基本的封装,简单易懂.
+		function $(obj){return document.getElementById(obj)};//返回dom对象
+		//上面为封装,下面为调用
+		//$是函数名.
+		show.onclick=function(){
+			show.className="hide";
+		};
+		mask.onclick=function(){
+			var show=document.getElementById("show").className="show";
+		};
+		back.onclick=function(){
+			var show=document.getElementById("show").className="hide";
+		};
+	};
+		/*下面这个写法是普遍所有新手都会理解的,但如何再简化呢?可以稍微参考上面的.(还想优化,请买书学习)
+		 *
+		var show=document.getElementById("show");
+		show.onclick=function(){
+			show.className="hide";
+		};
+		var mask=document.getElementById("mask");
+		mask.onclick=function(){
+			var show=document.getElementById("show").className="show";
+		};
+		var back=document.getElementById("back");
+		back.onclick=function(){
+			var show=document.getElementById("show").className="hide";
+		};
+		*/
+	
+	</script>
+	</body>
+
+</html>

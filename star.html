@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>星级投票</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Cache-Control" name="no-store" />
+		<meta http-equiv="window-target" content="_top" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="renderer" content="webkit">
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/template.css" />
+		<script type="text/javascript" src="js/star.js"></script>
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+		<style>
+	/*星级好评插件样式*/
+ul{list-style-type:none;}
+#star{height:50px;position:absolute;left:55px;}
+#star ul{float:left;display:inline;height:19px;line-height:19px;}
+#star ul{margin:10px -33px;}
+#star li{float:left;width:24px;cursor:pointer;text-indent:-9999px;background:url(img/star.png) no-repeat;}
+#star li.on{background-position:0 -28px;}
+/*第二个星级插件*/
+ #vote div{position:relative;float:left;cursor:pointer;color:#4F9BD0;/*这里可以调整颜色*/}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">星级投票</h1>
+		</header>
+	<section class="mui-content" >
+		<article>
+			<p>这里涉及了1个问题:</p>
+			<p>1,背景图:我用的是css sprite的方法,把相关的图片都放到一张里面去,然后通过背景定位实现.</p>
+			<p>注意:这里引入的是2个不同的星级投票插件,带图片的是引入:star.js和jq文件;第二个是原生JS写的,js代码在下面.</p>
+		</article></section>
+		<div class="mui-content">
+			<p>第一个星级插件</p>
+		<div id="star">
+			<ul>
+				<li><a href="javascript:;">1</a>
+				</li>
+				<li><a href="javascript:;">2</a>
+				</li>
+				<li><a href="javascript:;">3</a>
+				</li>
+				<li><a href="javascript:;">4</a>
+				</li>
+				<li><a href="javascript:;">5</a>
+				</li>
+			</ul>
+		</div></div>
+		<div class="mui-content">
+		<p>第二个星级插件</p>
+	    <div id="voteed" style="color:#000000;">选取：</div>
+	    <div id="vote">
+	        <div>☆</div>
+	        <div>☆</div>
+	        <div>☆</div>
+	        <div>☆</div>
+	        <div>☆</div>
+	    </div>
+		</div>
+	
+	<!--第二个星级插件-->
+	
+<script type="text/javascript">
+        function getTypeElement(es,type){
+        	//获取指定类型的节点
+            var esLen=es.length,i=0,eArr=[],esI=null;
+           for(;i<esLen;i++){
+           	esI=es[i];if( esI.nodeName.replace("#","").toLocaleLowerCase()==type
+           	){ eArr.push(esI)}}; return eArr};
+
+        function vote(e){//等级星投票效果
+            var votes=getTypeElement(e.childNodes,"div"),
+                    i=0,m=null,k=0,n=0,allnum=5,
+                    voteed=document.getElementById("voteed");
+            for(;i<allnum;i++){
+                m=votes[i];
+                m.setAttribute("data-num",i);//设置星星的级别
+                m.onmouseover=function(){//鼠标移入
+                    k=0;n=parseInt(this.getAttribute("data-num"),10);//获取当前元素第几个
+                   voteed.innerHTML="选取"+(n+1)+"星级";for(;k<allnum;k++){var v=votes[k];v.innerHTML=parseInt(v.getAttribute("data-num"),10)<=n?"★":"☆"};};};};
+        vote(document.getElementById("vote"));
+</script>
+	<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init();
+	</script>
+	</body>
+
+</html>

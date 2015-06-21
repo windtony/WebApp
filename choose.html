@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>单选和多选</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Cache-Control" name="no-store" />
+		<meta http-equiv="window-target" content="_top" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="renderer" content="webkit">
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/template.css" />
+		<style>
+/*很多人为了兼容IE,都忘记CSS3有这个新属性了.*/		
+input[type=checkbox],input[type=radio]{width:20px;height:20px;margin-bottom:-3px;-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:10px;-webkit-border-radius:10px;border:2px solid#00CC66;outline:0;padding:5px}
+input[type=radio]:checked{background:#FF69B4}
+input[type=checkbox]:checked{background:#000}
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">单选和多选</h1>
+		</header>
+		<section class="mui-content">
+			<article>
+				<p>很多时候,我们做单选或多选,往往选择的样式都是设计图的,用CSS3或JS来改变原生样式问题.但如何来使用CSS3去取原生样式呢？请看案例:</p>
+			</article>
+			<form>
+				<div class="wrap grid">
+					<label>
+						<input type="radio" name="radio" checked="checked" /><span>单选1</span>
+					</label>
+
+					<label>
+						<input type="radio" name="radio" /><span>单选2</span>
+					</label>
+				</div>
+				<div class="wrap grid">
+					<label>
+						<input type="checkbox" /><span>复选1</span>
+					</label>
+					<label>
+						<input type="checkbox" /><span>复选1</span>
+					</label>
+				</div>
+			</form>
+
+			<div class="wrap grid">
+				<h5>Checkbox全选、取消全选、反选</h5>
+				<p>
+					<input type="button" id='allSelect' value="全选">
+					<input type="button" id='canelallSelect' value="取消全选">
+					<input type="button" id='_select' value='反选'>
+				</p>
+
+				<div>
+					<label>
+						<input class="checkbox" type="checkbox" name='actionSelects'>Checkbox全选、取消全选、反选</label>
+				</div>
+				<div>
+					<label>
+						<input class="checkbox" type="checkbox" name='actionSelects'>Checkbox全选、取消全选、反选</label>
+				</div>
+				<div>
+					<label>
+						<input class="checkbox" type="checkbox" name='actionSelects'>Checkbox全选、取消全选、反选</label>
+				</div>
+				<div>
+					<label>
+						<input class="checkbox" type="checkbox" name='actionSelects'>Checkbox全选、取消全选、反选</label>
+				</div>
+			</div>
+
+		</section>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init();
+	</script>
+		<script type="text/javascript">
+			window.onload = function(){
+			        var targets = document.getElementsByName("actionSelects"),
+						targetsLen = targets.length,
+						i = 0;
+					document.getElementById("allSelect").onclick = function() {
+						for (i = 0; i < targetsLen; i++) {
+							targets[i].checked = true
+						}
+					}
+					document.getElementById("canelallSelect").onclick = function() {
+						for (i = 0; i < targetsLen; i++) {
+							targets[i].checked = false
+						}
+					}
+					document.getElementById("_select").onclick = function() {
+						for (i = 0; i < targetsLen; i++) {
+							targets[i].checked = !targets[i].checked
+						}
+					}
+			    };
+		</script>
+	</body>
+
+</html>

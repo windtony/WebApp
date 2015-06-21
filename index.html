@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首页</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-Control" name="no-store" />
+	<meta http-equiv="window-target" content="_top" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="renderer" content="webkit">
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" href="css/mui.min.css" />
+	<link rel="stylesheet" href="css/template.css" />
+	<style>
+li{font-size:1.4rem;color:#000}
+.w20{width:20px}
+.mui-btn-block{padding:12px 0;}
+	</style>
+<script type="text/javascript" charset="utf-8">
+//取消浏览器的所有事件，使得active的样式在手机上正常生效
+document.addEventListener('touchstart',function(){
+    return false;
+},true);
+// 禁止选择
+document.oncontextmenu=function(){
+	return false;
+};
+// H5 plus事件处理
+var as='slide-in-right',at=200;// 默认动画时间
+function plusReady(){
+	// 隐藏滚动条
+	plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+	// Android处理返回键
+	plus.key.addEventListener('backbutton',function(){
+		if(confirm('确认退出？')){
+			plus.runtime.quit();
+		}
+	},false);
+	compatibleAdjust();
+}
+if(window.plus){
+	plusReady();
+}else{
+	document.addEventListener('plusready',plusReady,false);
+}
+// DOMContentLoaded事件处理
+var _domReady=false;
+document.addEventListener('DOMContentLoaded',function(){
+	_domReady=true;
+	compatibleAdjust();
+},false);
+// 兼容性样式调整
+var _adjust=false;
+function compatibleAdjust(){
+	if(_adjust||!window.plus||!_domReady){
+		return;
+	}
+	_adjust=true;
+	// iOS平台使用div的滚动条
+	if('iOS'==plus.os.name){
+		as='pop-in';
+		at=300;
+		document.getElementById('content').className='scontent';
+	}
+	// 预创建二级窗口
+	preateWebviews();
+	// 关闭启动界面
+	setTimeout(function(){
+		plus.navigator.closeSplashscreen();
+	},500);
+}
+// 处理点击事件
+var _openw=null;
+function clicked(id){
+	if(_openw){return;}
+	_openw=preate[id];
+	if(_openw){
+		if(_openw.showded){
+			_openw.show(as,at);
+		}else{
+			_openw.show(as,at);
+			_openw.showded=true;
+		}
+		_openw=null;
+	}else{
+		var wa=plus.nativeUI.showWaiting();
+		_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+		preate[id]=_openw;
+		_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
+//		setTimeout(function(){//延后显示可避免低端机上动画时白屏
+			wa.close();
+			_openw.show(as,at);
+			_openw.showded=true;
+			_openw=null;
+//		},200);
+		},false);
+		_openw.addEventListener('close',function(){//页面关闭后可再次打开
+			_openw=null;
+			preate[id]&&(preate[id]=null);//兼容窗口的关闭
+		},false);
+	}
+}
+// 预创建二级页面
+var preate={};
+
+function preateWebivew(id){
+	if(!preate[id]){
+		var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+		preate[id]=w;
+		w.addEventListener('close',function(){//页面关闭后可再次打开
+			_openw=null;
+			preate[id]&&(preate[id]=null);//兼容窗口的关闭
+		},false);
+	}
+}
+// 清除预创建页面(仅)
+function preateClear(){
+	for(var p in preate){
+		var w=preate[p];
+		if(w&&w.showded&&!w.isVisible()){
+			w.close();
+			preate[p]=null;
+		}
+	}
+}
+		</script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<h1 class="mui-title">移动端总结</h1>
+	</header>
+	<section class="mui-content">
+		<article>
+			<p>从入门到现在做一个总结,以下内容包括JS插件,都是日常经常遇到的问题.</p>
+			<p>每个页面里面都有相关的解释.</p>
+		</article>
+			<ul id="list" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="select.html" onclick="clicked(this.id);">
+						select下拉框插件
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="choose.html" onclick="clicked(this.id);">
+						单选和多选
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="linkage.html" onclick="clicked(this.id);">
+						省级联动(省市区)
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="file.html" onclick="clicked(this.id);">
+						input[file]文件上传
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="javascript:void(0)">
+						sticky粘性布局
+					</a>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="sticky.html" onclick="clicked(this.id);">
+								原生js+css的fixed布局
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="sticky-header.html" onclick="clicked(this.id);">
+								头部滑动后固定(JQ插件)
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="sticky-center.html" onclick="clicked(this.id);">
+								中间滑动后固定(JQ插件)
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="sticky-right.html" onclick="clicked(this.id);">
+								右边滑动后固定(JQ插件)
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="javascript:void(0)">
+						综合-页面刷新、屏幕宽度检测等
+					</a>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="refresh.html" onclick="clicked(this.id);">
+								页面刷新
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="screen.html" onclick="clicked(this.id);">
+								屏幕宽度检测
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="slide.html" onclick="clicked(this.id);">
+						swipe和tab图片滑动和选项卡
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="spa.html" onclick="clicked(this.id);">
+						全屏滑动(SPA移动单页视图)
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="star.html" onclick="clicked(this.id);">
+						星级投票
+					</a>
+				</li><li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="character.html" onclick="clicked(this.id);">
+						文字段
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="mask.html" onclick="clicked(this.id);">
+						弹出框
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" id="form.html" onclick="clicked(this.id);">
+						form表单总结
+					</a>
+				</li>
+			</ul>
+	</section>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+</body>
+</html>
