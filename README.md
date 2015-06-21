@@ -12,5 +12,6 @@ H5+App一些常用的插件总结和页面布局.
 2，测试屏幕大小必须是整个屏幕，所以会覆盖当前页面内容，无法返回.<br />
 ###马上预览安装:
 安卓:<br />
-![image](https://github.com/windtony/H5-App/blob/master/img/WebAPP.png)<br />
-IOS的一般要越狱，所以就不上传了.
+![image](https://github.com/windtony/WebApp/blob/master/img/android.png)<br />
+IOS的一般要越狱:<br />
+![image](https://github.com/windtony/WebApp/blob/master/img/apple.png)
